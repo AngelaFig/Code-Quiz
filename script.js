@@ -2,12 +2,26 @@
 // I WANT to take a timed quiz on JavaScript fundamentals that stores high scores
 // SO THAT I can gauge my progress compared to my peers
 
-// Set up selectors, initialize variables, wins losses, 
+// Set up selectors, initializer variables, wins losses, 
+var startButtonEl = document.querySelector(".start-button");
+var questionEl = document.querySelector("#question");
 
-// To DO:
+var winCount = 0;
+var lossCount = 0;
+var questionAsked = [];
+var correctAnswer = [];
+
 // HOW GAME STARTS
 // WHEN I click the start button,
 // THEN a timer starts and I am presented with a question.
+
+function startQuiz() {
+    console.log("start")
+}
+
+startButtonEl.addEventListener("click",startQuiz)
+
+// must select from multiple choice answers- ul 
 
 // WHEN I answer a question
 // THEN I am presented with another question
