@@ -12,9 +12,35 @@
         <button class="start-button">Start</button> 
         <p> The following quiz will test your knowledge on JavaScript material <br>with a series of multiple choice questions. Good luck! </p>
     </header>
-
     <main>
-        <p id="question"></p>
+        <form class = "quiz-container">
+            <h2>Question Text</h2>
+        <ul>
+            <li>
+                <input type="radio" name="answer" id="a" class="answer">
+                <label for="a" id="a-text">Answer</label>
+            </li>
+
+            <li>
+                <input type="radio" name="answer" id="b" class="answer">
+                <label for="b" id="b-text">Answer</label>
+            </li>
+
+            <li>
+                <input type="radio" name="answer" id="c" class="answer">
+                <label for="c" id="c-text">Answer</label>
+            </li>
+
+            <li>
+                <input type="radio" name="answer" id="d" class="answer">
+                <label for="d" id="d-text">Answer</label>
+            </li>
+        </ul>
+    </form>
+        <button id="submit">Submit</button>
+    
+    
+        
 
     </main>
 
