@@ -8,14 +8,16 @@ var questionEl = document.querySelector("#question");
 var optionsEl = document.querySelector("#options");
 var answerEl = document.querySelectorAll(".answer");
 var quizTimeEl = document.querySelector("#quiz-time");
+var alertEl = document.querySelector("#alert");
 var aText = document.querySelector("a-text");
 var bText = document.querySelector("b-text");
 var cText = document.querySelector("c-text");
 var dText = document.querySelector("d-text");
 
 
-var winCount = 0;
-var lossCount = 0;
+// var winCount = 0;
+// var lossCount = 0;
+var totalScore= 0;
 let quizTime = 60;
 var questions = [{
     question: "Question 1: What Does HTML Stand For? ",
@@ -76,11 +78,11 @@ function displayQuestions() {
             event.preventDefault()
             console.log(event.target.innerHTML)
             if (event.target.innerHTML === answer) {
-                alert("correct answer")
+                alertEl.textContent = "correct answer"
                 questionsNumber++;
                 displayQuestions()
             } else {
-                alert("incorrect answer")
+                alertEl.textContent = "incorrect answer"
                 questionsNumber++;
                 displayQuestions()
             }
@@ -89,6 +91,8 @@ function displayQuestions() {
 
     }
     optionsEl.append(choiceDiv)
+
+    
 }
 
 // HOW GAME STARTS
@@ -104,7 +108,13 @@ function startQuiz() {
 
 // How do I win?
 // WHen time greater thn 0
-    
+ function correctGuess() {
+    if(alertEl.textContent === "correct" ) {
+        totalScore++;
+        localStorage.setItem("scoreCount", totalScore);
+
+    }
+ }
 
 
 

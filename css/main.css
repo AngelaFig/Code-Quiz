@@ -78,3 +78,16 @@ ul li {
     font-size: small;
     display: inline-block;
 }
+
+#alert-area {
+    height:fit-content;
+    width: 50%;
+    margin: auto;
+}
+#alert {
+    background-color:chartreuse;
+    color:black;
+    width:50%;
+    margin: auto;
+    text-align: center;
+}
