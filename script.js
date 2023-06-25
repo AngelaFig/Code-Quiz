@@ -5,10 +5,12 @@
 // Set up selectors, initializer variables, wins losses, 
 var startButtonEl = document.querySelector(".start-button");
 var questionEl = document.querySelector("#question");
+var answerEl = document.querySelectorAll(".answer")
 
 var winCount = 0;
 var lossCount = 0;
-var questionAsked = [];
+var questionAsked = []; 
+// do I make question Asked just an array/object?
 var correctAnswer = [];
 
 // HOW GAME STARTS
