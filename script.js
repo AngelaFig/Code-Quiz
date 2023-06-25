@@ -15,7 +15,17 @@ var dText = document.querySelector("d-text");
 
 var winCount = 0;
 var lossCount = 0;
-var questionAsked = []; 
+var questions = [{
+    question:"Question One",
+    choices: ["Option1", "Option2","Option3"],
+    answer: "Option2",
+},
+{
+    question:"Question Two",
+    choices: ["Option4", "Option5","Option6"],
+    answer: "Option5",
+}
+]; 
 
 var correctAnswer = [];
 
