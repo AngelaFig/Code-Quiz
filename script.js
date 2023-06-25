@@ -7,7 +7,6 @@ var startButtonEl = document.querySelector(".start-button");
 var questionEl = document.querySelector("#question");
 var optionsEl = document.querySelector("#options");
 var answerEl = document.querySelectorAll(".answer");
-var submitButtonEl = document.querySelector("#submit");
 var quizTimeEl = document.querySelector("#quiz-time");
 var aText = document.querySelector("a-text");
 var bText = document.querySelector("b-text");
@@ -24,9 +23,24 @@ var questions = [{
     answer: "HyperText Markup Language"
 },
 {
-    question: "What Does CSS Stand For? ",
+    question: "Question 2: What Does CSS Stand For? ",
     choices: ["Cascading Style Sheets", "Complete Styling System", "Centralized Styling System", "None of the Above"],
     answer: "Cascading Style Sheets",
+},
+{
+    question:"Question 3: What Are Elements Nested Inside Other Elements Called? ",
+    choices:["Cozy Elements", "Dependent Elements","Child Elements", "None of the Above"],
+    answer:"Child Elements"
+},
+{
+    question: "Question 4: What is the Tool that Takes a Static HTML/CSS webpage and Makes it Interactive? ",
+    choices:["API's","JavaScript","Magic", "None of the Above"],
+    answer: "JavaScript"
+},
+{
+    question: "Question 5: What is the Term that Refers to the Order in Which a Computer Executes Code in a Script? ",
+    choices: ["Control Flow", "Random", "Bottom, Up", "None of the Above"],
+    answer: "Control Flow"
 }
 ];
 
@@ -37,8 +51,9 @@ function startTimer() {
     let quizInterval = setInterval(function () {
         if (quizTime === -1) {
             clearInterval(quizInterval)
+            // lossCount++;
         } else {
-            quizTimeEl.innerHTML = "Time Left: " + quizTime
+            quizTimeEl.textContent = "Time Left: " + quizTime
             quizTime--;
         };
 
@@ -50,25 +65,25 @@ function displayQuestions() {
     questionEl.innerHTML = ""
     optionsEl.innerHTML = ""
     let questionObject = questions[questionsNumber];
-    questionEl.innerHTML = questionObject.question
+    questionEl.textContent = questionObject.question
     let choices = questionObject.choices
     let answer = questionObject.answer
     let choiceDiv = document.createElement("div")
     for (i = 0; i < choices.length; i++) {
         let choiceBtn = document.createElement("button")
-        choiceBtn.innerHTML = choices[i]
+        choiceBtn.textContent = choices[i]
         choiceBtn.addEventListener("click", function (event) {
             event.preventDefault()
-        //     console.log(event.target.innerHTML)
-        //     if (event.target.innerHTML === answer) {
-        //         alert("correct answer")
-        //         questionsNumber++;
-        //         displayQuestions()
-        //     } else {
-        //         alert("incorrect answer")
-        //         questionsNumber++;
-        //         displayQuestions()
-        //     }
+            console.log(event.target.innerHTML)
+            if (event.target.innerHTML === answer) {
+                alert("correct answer")
+                questionsNumber++;
+                displayQuestions()
+            } else {
+                alert("incorrect answer")
+                questionsNumber++;
+                displayQuestions()
+            }
         })
         choiceDiv.append(choiceBtn)
 
@@ -86,29 +101,15 @@ function startQuiz() {
     displayQuestions()
 }
 
-function uploadAnswer(event) {
-    event.preventDefault()
 
-    questionEl.innerHTML = ""
-    optionsEl.innerHTML = ""
-    let questionObject = questions[questionsNumber];
-    questionEl.innerHTML = questionObject.question
-    let choices = questionObject.choices
-    let answer = questionObject.answer
-    console.log(event.target.innerHTML)
-            if (event.target.innerHTML === answer) {
-                alert("correct answer")
-                questionsNumber++;
-                displayQuestions()
-            } else {
-                alert("incorrect answer")
-                questionsNumber++;
-                displayQuestions()
-            }
-}
+// How do I win?
+// WHen time greater thn 0
+    
+
+
 
 startButtonEl.addEventListener("click", startQuiz);
-submitButtonEl.addEventListener("click",uploadAnswer);
+
 
 // must select from multiple choice answers- ul
 

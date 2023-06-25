@@ -65,9 +65,16 @@ ul li {
     font-size:medium;
     margin: 1 rem, 0;
 }
-
+/* 
 #submit {
     background-color: peachpuff;
     width: 100%;
-    font-size: medium;
+    font-size: medium; */
+/* } */
+
+#quiz-time {
+    background-color:crimson;
+    color: black;
+    font-size: small;
+    display: inline-block;
 }
