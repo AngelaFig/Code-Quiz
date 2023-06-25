@@ -7,6 +7,7 @@ var startButtonEl = document.querySelector(".start-button");
 var questionEl = document.querySelector("#question");
 var answerEl = document.querySelectorAll(".answer");
 var submitButtonEl = document.querySelector("#submit");
+var quizTimeEl = document.querySelector("#quiz-time");
 var aText = document.querySelector("a-text");
 var bText = document.querySelector("b-text");
 var cText = document.querySelector("c-text");
@@ -26,17 +27,29 @@ var questions = [{
     answer: "Option5",
 }
 ]; 
+let quizTime = 5;
 
 var correctAnswer = [];
 
+function startTimer() {
+    let quizInterval = setInterval(function(){
+        if(quizTime ===-1) {
+            clearInterval(quizInterval)
+        } else {
+            quizTimeEl.innerHTML= "Time Left: " + quizTime
+        quizTime--; 
+        };
 
+    },1000)
+}
 
 // HOW GAME STARTS
 // WHEN I click the start button,
 // THEN a timer starts and I am presented with a question.
 
 function startQuiz() {
-    console.log("start")
+    // console.log("start")
+    startTimer();
 }
 
 startButtonEl.addEventListener("click",startQuiz)
