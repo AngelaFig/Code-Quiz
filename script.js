@@ -5,6 +5,7 @@
 // Set up selectors, initializer variables, wins losses, 
 var startButtonEl = document.querySelector(".start-button");
 var questionEl = document.querySelector("#question");
+var optionsEl = document.querySelector("#options");
 var answerEl = document.querySelectorAll(".answer");
 var submitButtonEl = document.querySelector("#submit");
 var quizTimeEl = document.querySelector("#quiz-time");
@@ -17,30 +18,61 @@ var dText = document.querySelector("d-text");
 var winCount = 0;
 var lossCount = 0;
 var questions = [{
-    question:"Question One",
-    choices: ["Option1", "Option2","Option3"],
+    question: "Question One",
+    choices: ["Option1", "Option2", "Option3"],
     answer: "Option2",
 },
 {
-    question:"Question Two",
-    choices: ["Option4", "Option5","Option6"],
+    question: "Question Two",
+    choices: ["Option4", "Option5", "Option6"],
     answer: "Option5",
 }
-]; 
+];
 let quizTime = 5;
 
 var correctAnswer = [];
 
 function startTimer() {
-    let quizInterval = setInterval(function(){
-        if(quizTime ===-1) {
+    let quizInterval = setInterval(function () {
+        if (quizTime === -1) {
             clearInterval(quizInterval)
         } else {
-            quizTimeEl.innerHTML= "Time Left: " + quizTime
-        quizTime--; 
+            quizTimeEl.innerHTML = "Time Left: " + quizTime
+            quizTime--;
         };
 
-    },1000)
+    }, 1000)
+}
+let questionsNumber = 0;
+
+function displayQuestions() {
+    questionEl.innerHTML = ""
+    optionsEl.innerHTML = ""
+    let questionObject = questions[questionsNumber];
+    questionEl.innerHTML = questionObject.question
+    let choices = questionObject.choices
+    let answer = questionObject.answer
+    let choiceDiv = document.createElement("div")
+    for (i = 0; i < choices.length; i++) {
+        let choiceBtn = document.createElement("button")
+        choiceBtn.innerHTML = choices[i]
+        choiceBtn.addEventListener("click", function (event) {
+            event.preventDefault()
+        //     console.log(event.target.innerHTML)
+        //     if (event.target.innerHTML === answer) {
+        //         alert("correct answer")
+        //         questionsNumber++;
+        //         displayQuestions()
+        //     } else {
+        //         alert("incorrect answer")
+        //         questionsNumber++;
+        //         displayQuestions()
+        //     }
+        })
+        choiceDiv.append(choiceBtn)
+
+    }
+    optionsEl.append(choiceDiv)
 }
 
 // HOW GAME STARTS
@@ -50,11 +82,34 @@ function startTimer() {
 function startQuiz() {
     // console.log("start")
     startTimer();
+    displayQuestions()
 }
 
-startButtonEl.addEventListener("click",startQuiz)
+function uploadAnswer(event) {
+    event.preventDefault()
 
-// must select from multiple choice answers- ul 
+    questionEl.innerHTML = ""
+    optionsEl.innerHTML = ""
+    let questionObject = questions[questionsNumber];
+    questionEl.innerHTML = questionObject.question
+    let choices = questionObject.choices
+    let answer = questionObject.answer
+    console.log(event.target.innerHTML)
+            if (event.target.innerHTML === answer) {
+                alert("correct answer")
+                questionsNumber++;
+                displayQuestions()
+            } else {
+                alert("incorrect answer")
+                questionsNumber++;
+                displayQuestions()
+            }
+}
+
+startButtonEl.addEventListener("click", startQuiz);
+submitButtonEl.addEventListener("click",uploadAnswer);
+
+// must select from multiple choice answers- ul
 
 // WHEN I answer a question
 // THEN I am presented with another question
@@ -62,7 +117,7 @@ startButtonEl.addEventListener("click",startQuiz)
 // WHEN I answer a question incorrectly
 // THEN time is subtracted from the clock
 
-// HOW GAME ENDS 
+// HOW GAME ENDS
 // WHEN all questions are answered or the timer reaches 0
 // THEN the game is over
 
