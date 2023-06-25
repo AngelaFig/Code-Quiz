@@ -17,18 +17,19 @@ var dText = document.querySelector("d-text");
 
 var winCount = 0;
 var lossCount = 0;
+let quizTime = 60;
 var questions = [{
-    question: "Question One",
-    choices: ["Option1", "Option2", "Option3"],
-    answer: "Option2",
+    question: "Question 1: What Does HTML Stand For? ",
+    choices: ["HyperText Markup Language", "Handling The Main Layout", "Hidden Text Makes Language", "None of the Above"],
+    answer: "HyperText Markup Language"
 },
 {
-    question: "Question Two",
-    choices: ["Option4", "Option5", "Option6"],
-    answer: "Option5",
+    question: "What Does CSS Stand For? ",
+    choices: ["Cascading Style Sheets", "Complete Styling System", "Centralized Styling System", "None of the Above"],
+    answer: "Cascading Style Sheets",
 }
 ];
-let quizTime = 5;
+
 
 var correctAnswer = [];
 
