@@ -86,3 +86,10 @@ ul li {
 .hide {
     display: none;
 }
+
+#submit-form{
+    background-color: lightcoral;
+    color:white;
+    width: 50%;
+    margin:auto
+}
