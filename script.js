@@ -1,6 +1,3 @@
-// Project: AS A coding boot camp student
-// I WANT to take a timed quiz on JavaScript fundamentals that stores high scores
-// SO THAT I can gauge my progress compared to my peers
 
 // Set up selectors, initializer variables, wins losses, 
 var startButtonEl = document.querySelector(".start-button");
@@ -9,16 +6,24 @@ var optionsEl = document.querySelector("#options");
 var answerEl = document.querySelectorAll(".answer");
 var quizTimeEl = document.querySelector("#quiz-time");
 var alertEl = document.querySelector("#alert");
-var aText = document.querySelector("a-text");
-var bText = document.querySelector("b-text");
-var cText = document.querySelector("c-text");
-var dText = document.querySelector("d-text");
+var winCountEl = document.querySelector("#win-count");
+var submitFormEl = document.querySelector("#submit-form");
+var scoreEl = document.querySelector("#highscore");
+var usernameEl = document.querySelector("#username");
+var submitBtnEl = document.querySelector("#submit-button");
+var mainEl = document.querySelector("#main-div");
+var scoreDisplayEl = document.querySelector("#score-display");
+// var aText = document.querySelector("a-text");
+// var bText = document.querySelector("b-text");
+// var cText = document.querySelector("c-text");
+// var dText = document.querySelector("d-text");
 
 
-// var winCount = 0;
-// var lossCount = 0;
-var totalScore= 0;
+var winCount = 0;
 let quizTime = 60;
+// / must select from multiple choice answers-
+// WHEN I answer a question
+// THEN I am presented with another question
 var questions = [{
     question: "Question 1: What Does HTML Stand For? ",
     choices: ["HyperText Markup Language", "Handling The Main Layout", "Hidden Text Makes Language", "None of the Above"],
@@ -43,7 +48,7 @@ var questions = [{
     question: "Question 5: What is the Term that Refers to the Order in Which a Computer Executes Code in a Script? ",
     choices: ["Control Flow", "Random", "Bottom, Up", "None of the Above"],
     answer: "Control Flow"
-}
+},
 ];
 
 
@@ -55,8 +60,8 @@ function startTimer() {
             clearInterval(quizInterval)
             // lossCount++;
         } else {
+           quizTime--;
             quizTimeEl.textContent = "Time Left: " + quizTime
-            quizTime--;
         };
 
     }, 1000)
@@ -64,36 +69,59 @@ function startTimer() {
 let questionsNumber = 0;
 
 function displayQuestions() {
-    questionEl.innerHTML = ""
-    optionsEl.innerHTML = ""
-    let questionObject = questions[questionsNumber];
+    questionEl.textContent = ""
+    optionsEl.textContent = ""
+    var questionObject = questions[questionsNumber];
     questionEl.textContent = questionObject.question
-    let choices = questionObject.choices
-    let answer = questionObject.answer
-    let choiceDiv = document.createElement("div")
+    var choices = questionObject.choices
+    var answer = questionObject.answer
+    var choiceDiv = document.createElement("div")
     for (i = 0; i < choices.length; i++) {
         let choiceBtn = document.createElement("button")
         choiceBtn.textContent = choices[i]
-        choiceBtn.addEventListener("click", function (event) {
+        choiceBtn.addEventListener("click", function(event) {
             event.preventDefault()
-            console.log(event.target.innerHTML)
-            if (event.target.innerHTML === answer) {
+            console.log(event.target.textContent)
+            if (event.target.textContent === answer) {
                 alertEl.textContent = "correct answer"
                 questionsNumber++;
+                winCount++;
+                winCountEl.textContent=winCount;
+                scoreEl.textContent = winCount;
+                if(questionsNumber<questions.length) {
+                    displayQuestions()
+                }else{
+                    transition()
+                    console.log("quiz is over")
+                }
                 displayQuestions()
-            } else {
+            } else{
                 alertEl.textContent = "incorrect answer"
                 questionsNumber++;
+                quizTime--;
+                quizTimeEl.textContent = "Time Left: " + quizTime
+                scoreEl.textContent = winCount;
                 displayQuestions()
             }
-        })
+            })
+        
         choiceDiv.append(choiceBtn)
-
     }
-    optionsEl.append(choiceDiv)
 
     
+    optionsEl.append(choiceDiv)
 }
+
+function transition() {
+    mainEl.setAttribute("class","hide")
+    submitFormEl.removeAttribute("class","hide")
+
+}
+// for(i=0; i<questionObject.length; i++){
+//     questionEl.innerHTML = questionObject[i].question
+//     for(i=0; i<questionObject[i].choices.length; i++){
+//     answerEl.textContent = questionObject[i].answer
+//     }}
 
 // HOW GAME STARTS
 // WHEN I click the start button,
@@ -105,26 +133,44 @@ function startQuiz() {
     displayQuestions()
 }
 
+function saveScore() {
+    var scoreArray = JSON.parse(localStorage.getItem("scoreList"))||[]
 
+    var newScore = {
+        name: usernameEl.value,
+        score: winCount,
+    }
+    scoreArray.push(newScore)
+    localStorage.setItem("scoreList",JSON.stringify(scoreArray))
+    displayScore()
+}
+
+function displayScore(){
+    var scoreArray = JSON.parse(localStorage.getItem("scoreList"))||[]
+    scoreArray.forEach(function(scoreItem){
+        var listItem = document.createElement("li")
+        listItem.textContent= scoreItem.name + ": " + scoreItem.score
+        scoreDisplayEl.append(listItem)
+    })
+}
+// displayScore()
+submitBtnEl.onclick = saveScore
 // How do I win?
 // WHen time greater thn 0
- function correctGuess() {
-    if(alertEl.textContent === "correct" ) {
-        totalScore++;
-        localStorage.setItem("scoreCount", totalScore);
+//  function correctGuess() {
+//     if(alertEl.textContent === "correct" ) {
+//         winCount++;
+//         localStorage.setItem("winCount", winCount);
+//         updateScore()
+//     }
+//  }
 
-    }
- }
-
-
+// function updateScore() {
+//     winCountEl.textContent = winCount;
+// }
 
 startButtonEl.addEventListener("click", startQuiz);
 
-
-// must select from multiple choice answers- ul
-
-// WHEN I answer a question
-// THEN I am presented with another question
 
 // WHEN I answer a question incorrectly
 // THEN time is subtracted from the clock

@@ -6,11 +6,7 @@ body {
     margin:0;
     background-color: lightblue;
     background-image: linear-gradient(315deg, #b8b8b8 0%, #b8c6db 100%);
-    /* display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    margin: 0; */
+
 }
 
 .title-section {
@@ -65,14 +61,10 @@ ul li {
     font-size:medium;
     margin: 1 rem, 0;
 }
-/* 
-#submit {
-    background-color: peachpuff;
-    width: 100%;
-    font-size: medium; */
-/* } */
+ 
 
-#quiz-time {
+    /* #quiz-time {  */
+    #quiz-time{ 
     background-color:crimson;
     color: black;
     font-size: small;
@@ -90,4 +82,7 @@ ul li {
     width:50%;
     margin: auto;
     text-align: center;
+}
+.hide {
+    display: none;
 }
